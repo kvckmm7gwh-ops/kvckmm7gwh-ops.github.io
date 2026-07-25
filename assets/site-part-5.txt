@@ -6,8 +6,9 @@ n><span>Microsoft Office</span><span>Windows</span><span>macOS</span><span>Linux
 <footer><div class="wrap foot"><span>© 2026 David Chauke · Polokwane, South Africa</span><span>IT Support · Systems · Networking · Infrastructure</span></div></footer>
 <script>
 
-fetch('assets/photo-optimized.txt').then(r=>r.text()).then(b64=>{
- document.querySelectorAll('.dynamic-photo').forEach(img=>img.src='data:image/webp;base64,'+b64.trim());
+Promise.all([1,2,3,4].map(n=>fetch('assets/photo-final-'+n+'.txt',{cache:'no-store'}).then(r=>r.text()))).then(parts=>{
+ const b64=parts.join('').trim();
+ document.querySelectorAll('.dynamic-photo').forEach(img=>img.src='data:image/webp;base64,'+b64);
 }).catch(()=>{});
 
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
